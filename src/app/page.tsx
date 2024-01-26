@@ -93,7 +93,7 @@ export default  function Home() {
 
   return (
     <PrimeReactProvider >
-      <div className="App" ref={fullscreenRef}>
+      <div className="App">
          
 
         
