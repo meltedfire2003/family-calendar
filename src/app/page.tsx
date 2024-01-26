@@ -94,11 +94,6 @@ export default  function Home() {
   return (
     <PrimeReactProvider >
       <div className="App">
-         
-
-        
-
-
         <SpeedDial model={items}  direction="down" style={{ top: 14, left: 'calc(100% - 4rem)' }} />
 
    
