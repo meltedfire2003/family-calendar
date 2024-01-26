@@ -1,0 +1,38 @@
+{
+    "users": [
+        {
+            "firstName": "owen",
+            "lastName": "newton"
+        },
+        {
+            "id": null,
+            "dateCreated": "2024-01-26T17:15:49.776Z",
+            "dateUpdated": "2024-01-26T17:15:49.776Z"
+        },
+        {
+            "id": null,
+            "dateCreated": "2024-01-26T17:17:47.091Z",
+            "dateUpdated": "2024-01-26T17:17:47.091Z"
+        },
+        {
+            "id": null,
+            "dateCreated": "2024-01-26T17:19:12.957Z",
+            "dateUpdated": "2024-01-26T17:19:12.957Z"
+        },
+        {
+            "id": null,
+            "dateCreated": "2024-01-26T17:19:18.882Z",
+            "dateUpdated": "2024-01-26T17:19:18.882Z"
+        },
+        {
+            "id": null,
+            "dateCreated": "2024-01-26T17:19:23.901Z",
+            "dateUpdated": "2024-01-26T17:19:23.901Z"
+        },
+        {
+            "id": 7,
+            "dateCreated": "2024-01-26T17:20:42.737Z",
+            "dateUpdated": "2024-01-26T17:20:42.737Z"
+        }
+    ]
+}
