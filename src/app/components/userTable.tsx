@@ -1,6 +1,6 @@
 import users from "@/pages/api/users";
 import { Button } from "primereact/button";
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { GiTrashCan, GiPencil } from "react-icons/gi";
 import { DataView } from "primereact/dataview";
 import { Card } from "primereact/card";
@@ -51,7 +51,7 @@ export default function UserTable() {
       });
   }
 
-  const listTemplate = (users: any) => {
+  const listTemplate = (users: any) : any => {
     if (!users || users.length === 0) return null;
     let user = users.map((user: any, index: any) => {
       return (
