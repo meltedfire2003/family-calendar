@@ -2,14 +2,14 @@ import  fs  from 'fs';
 
 let data = require('/src/data/data.json');
 
-const create = async(user: { id: number; dateCreated: string; dateUpdated: string; }): Promise<void> => {
+const create = async(user: { id?: number; firstName: string; lastName: string; }): Promise<void> => {
     new Promise((resolve, reject) => {
         // generate new user id
         user.id = data.users.length ? data.users.length+ 1 : 1;
 
         // set date created and updated
-        user.dateCreated = new Date().toISOString();
-        user.dateUpdated = new Date().toISOString();
+        user.firstName = user.firstName
+        user.lastName = user.lastName
 
         // add and save user
         data.users.push(user);

@@ -1,21 +1,25 @@
-'use client'
-
- 
-import { Button } from "primereact/button";
-import { PrimeReactProvider } from "primereact/api"; 
-import { CiCalendar, CiCircleList, CiForkAndKnife } from "react-icons/ci";
+"use client";
+import { useEffect, useState } from "react";
+import moment from "moment";
+import { CiCalendar, CiCircleList, CiForkAndKnife, CiTrash } from "react-icons/ci";
 import { useFullscreen } from "./fullscreen";
 import { Calendar, momentLocalizer } from "react-big-calendar";
- 
-import moment from "moment";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import "primereact/resources/themes/mira/theme.css";
+import { PrimeReactProvider } from "primereact/api";
+import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { useState } from "react";
-import { GiVacuumCleaner } from "react-icons/gi";
+import { GiPencil, GiTrashCan, GiVacuumCleaner } from "react-icons/gi";
 import { OrderList } from "primereact/orderlist";
 import { Checkbox } from "primereact/checkbox";
 import { SpeedDial } from "primereact/speeddial";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "primereact/resources/themes/mira/theme.css";
+import { GrUserAdd } from "react-icons/gr";
+import { DataView } from "primereact/dataview";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { InputText } from "primereact/inputtext";
+import { get } from "http";
+import UserTable from "./components/userTable";
 
 const localizer = momentLocalizer(moment);
 
@@ -27,50 +31,38 @@ const events = [
   },
 ];
 
-export default  function Home() {
+export default function Home() {
   const { fullscreenRef, enterFullscreen, exitFullscreen, fullscreenActive } = useFullscreen();
   const [selectedTab, setSelectedTab] = useState("calendar");
-  const [visible, setVisible] = useState(false);
+  
 
-  const getUsers = async () => {
 
-    
-
-    const response = await fetch("./api/users");
-    const users = await response.json();
-    console.log(users);
-  }
+ 
 
   const items = [
     {
-        label: 'Calendar',
-        icon: 'pi pi-pencil',
-        command: () => {
-             
-        }
+      label: "Calendar",
+      icon: "pi pi-pencil",
+      command: () => {},
     },
     {
-        label: 'Todo',
-        icon: 'pi pi-refresh',
-        command: () => {
-             
-        }
+      label: "Todo",
+      icon: "pi pi-refresh",
+      command: () => {},
     },
     {
-        label: 'Menu',
-        icon: 'pi pi-trash',
-        command: () => {
-             
-        }
+      label: "Menu",
+      icon: "pi pi-trash",
+      command: () => {},
     },
     {
-        label: 'Chores',
-        icon: '',
-        command: () => {
-             alert('test')
-        }
-    } 
-];
+      label: "Chores",
+      icon: "",
+      command: () => {
+        alert("test");
+      },
+    },
+  ];
 
   const todos = [
     { name: "Do Dishes", completed: false },
@@ -78,10 +70,7 @@ export default  function Home() {
     { name: "Take a nap", completed: true },
   ];
 
- 
-
-
-  const itemTemplate = (item:any) => {
+  const itemTemplate = (item: any) => {
     return (
       <div style={{ display: "flex", flexDirection: "row", gap: 9, alignItems: "center" }}>
         <Checkbox onChange={(e) => (item.completed = e.checked)} checked={item.completed}></Checkbox>
@@ -91,63 +80,57 @@ export default  function Home() {
     );
   };
 
+  
+  
+
   return (
-    <PrimeReactProvider >
-      <div className="App">
-        <SpeedDial model={items}  direction="down" style={{ top: 14, left: 'calc(100% - 4rem)' }} />
+    <PrimeReactProvider>
+      <div className="flex justify-center flex-col">
+        <SpeedDial  model={items} direction="down" style={{ top: 14, left: "calc(100% - 4rem)" }} />
 
-   
+        <div style={{ display: "flex", flexDirection: "row", gap: 12, padding: 12, alignSelf: "flex-end", marginRight: 70 }}>
+          <Button  onClick={() => setSelectedTab("calendar")} pt={{ root: { style: { borderRadius: 50, padding: 10 } } }}>
+            <CiCalendar size={24} />
+          </Button>
 
+          <Button   onClick={() => setSelectedTab("todo")} pt={{ root: { style: { borderRadius: 50, padding: 10 } } }}>
+            <CiCircleList size={24} />
+          </Button>
 
-          <div style={{ display: "flex", flexDirection: "row", gap: 12, padding: 12, alignSelf:'flex-end', marginRight:70 }}>
+          <Button   onClick={() => setSelectedTab("menu")} pt={{ root: { style: { borderRadius: 50, padding: 10 } } }}>
+            <CiForkAndKnife size={24} />
+          </Button>
 
-          <Button onClick={() => setSelectedTab("calendar")} pt={{ root: { style: { borderRadius: 50, padding: 10 } } }}>
-              <CiCalendar size={24} />
-            </Button>
+          <Button   onClick={() => setSelectedTab("chores")} pt={{ root: { style: { borderRadius: 50, padding: 10 } } }}>
+            <GiVacuumCleaner size={24} />
+          </Button>
 
-            <Button onClick={() => setSelectedTab("todo")} pt={{ root: { style: { borderRadius: 50, padding: 10 } } }}>
-              <CiCircleList size={24} />
-            </Button>
+          <Button  onClick={() => setSelectedTab("users")} pt={{ root: { style: { borderRadius: 50, padding: 10 } } }}>
+            <GrUserAdd size={24} />
+          </Button>
+        </div>
 
-            <Button onClick={() => setSelectedTab("menu")} pt={{ root: { style: { borderRadius: 50, padding: 10 } } }}>
-              <CiForkAndKnife size={24} />
-            </Button>
-
-            <Button onClick={() => setSelectedTab("chores")} pt={{ root: { style: { borderRadius: 50, padding: 10 } } }}>
-              <GiVacuumCleaner  size={24} />
-            </Button>
-
-           
-
-            
-          </div>
-
-          <Button label="Show" icon="pi pi-external-link" onClick={() => setVisible(true)} />
-<Dialog header="Header" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
-    <p className="m-0">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-</Dialog>
-
-          {selectedTab === "todo" && (
-            <div className="flex justify-center">
-              <OrderList dataKey="id" value={todos} itemTemplate={itemTemplate} header="Todos" pt={{ controls: { style: { display: "none" } } }}></OrderList>
-            </div>
-          )}
-
-          {selectedTab === "menu" && <p>menu</p>}
-
-          {selectedTab === "calendar" && <Calendar selectable localizer={localizer} defaultDate={new Date()} defaultView="month" events={events} style={{ height: "80vh" }} />}
-
-          
-
-          {selectedTab === "chores" && <p>chores</p>}
-
-          {!fullscreenActive && <Button label="Enter Fullscreen" rounded onClick={enterFullscreen} />}
          
+
+        {selectedTab === "todo" && (
+          <div className="flex justify-center">
+            <OrderList dataKey="id" value={todos} itemTemplate={itemTemplate} header="Todos" pt={{ controls: { style: { display: "none" } } }}></OrderList>
+          </div>
+        )}
+
+        {selectedTab === "menu" && <p>menu</p>}
+
+        {selectedTab === "calendar" && <Calendar selectable localizer={localizer} defaultDate={new Date()} defaultView="month" events={events} style={{ height: "80vh" }} />}
+
+        {selectedTab === "chores" && <p>chores</p>}
+
+        {selectedTab === "users" && (
+          <div className="my-8 mx-24">
+          <UserTable></UserTable>
+          </div>
+        )}
+
+        {/* {!fullscreenActive && <Button label="Enter Fullscreen" rounded onClick={enterFullscreen} />} */}
       </div>
     </PrimeReactProvider>
     // <PrimeReactProvider >

@@ -13,17 +13,21 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
     switch (req.method) {
       case 'POST':
-       // usersRepo.create({id:1, dateCreated:'2', dateUpdated:'2'})
-       usersRepo.create({id:0,dateCreated:'',dateUpdated:''}).then(() => {
-        console.log('here')
+        console.log("n", req.body)
+       usersRepo.create({firstName:req.body.firstName, lastName: req.body.lastName})
+      
         res.status(200).json('')
 
-       })
+      
        
         break;
       case 'GET':
         let users = usersRepo.getAll()
         res.status(200).json(users)
+        break;
+      case 'DELETE':
+        usersRepo.delete(req.body.id)
+        res.status(200).json('');
         break;
       
     }
