@@ -197,7 +197,7 @@ export default function Home() {
           </div>
         )}
 
-        {selectedTab === "menu" && <div id="test"> <Calendar views={views} {...otherProps}/></div>}
+        {/* {selectedTab === "menu" && <div id="test"> <Calendar   views={views} {...otherProps}/></div>} */}
 
         {selectedTab === "calendar" && <Calendar  selectable localizer={localizer} defaultDate={new Date()} defaultView="month" events={events} style={{ height: "80vh" }} />}
 

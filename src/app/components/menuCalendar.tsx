@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { Navigate } from "react-big-calendar";
-import TimeGrid from "react-big-calendar/lib/TimeGrid";
 import { Card } from "primereact/card";
 import moment from "moment";
 
-export default function CustomWeekView({ date, localizer, max = localizer.endOf(new Date(), "day"), min = localizer.startOf(new Date(), "day"), scrollToTime = localizer.startOf(new Date(), "day"), ...props }) {
+export default function CustomWeekView({ date, localizer, max = localizer.endOf(new Date(), "day"), min = localizer.startOf(new Date(), "day"), scrollToTime = localizer.startOf(new Date(), "day"), ...props }:any) {
   const currRange = useMemo(() => CustomWeekView.range(date, { localizer }), [date, localizer]);
 
 console.log(JSON.stringify(props))
@@ -30,7 +29,7 @@ const [start, ...rest] = CustomWeekView.range(date, { localizer });
       {props.events.map((event: any, index: any) => {
         return (
           <Card key={index} className="w-[30%] m-3"> 
-            <p>{new moment(event.start).format("dddd")}</p>
+            {/* <p>{new moment(event.start).format("dddd")}</p> */}
             {/* <p>{new moment(start).format("dddd")}</p> */}
             <p>{event.title}</p>
             <a href={event?.resource}> 
@@ -50,7 +49,7 @@ CustomWeekView.propTypes = {
   scrollToTime: PropTypes.instanceOf(Date),
 };
 
-CustomWeekView.range = (date, { localizer }) => {
+CustomWeekView.range = (date: any, { localizer }: any) => {
   const start = date;
   const end = localizer.add(start, 5, "day");
 
@@ -65,7 +64,7 @@ CustomWeekView.range = (date, { localizer }) => {
   return range;
 };
 
-CustomWeekView.navigate = (date, action, { localizer }) => {
+CustomWeekView.navigate = (date: any, action: any, { localizer }: any) => {
   switch (action) {
     case Navigate.PREVIOUS:
       return localizer.add(date, -6, "day");
@@ -78,7 +77,7 @@ CustomWeekView.navigate = (date, action, { localizer }) => {
   }
 };
 
-CustomWeekView.title = (date, { localizer }) => {
+CustomWeekView.title = (date: any, { localizer }: any) => {
   const [start, ...rest] = CustomWeekView.range(date, { localizer });
   return localizer.format({ start, end: rest.pop() }, "dayRangeHeaderFormat");
 };
