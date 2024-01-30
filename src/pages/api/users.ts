@@ -9,8 +9,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
     switch (req.method) {
       case 'POST':
         console.log("n", req.body)
-      // usersRepo.create({firstName:req.body.firstName, lastName: req.body.lastName})
-      usersRepo.create();
+       usersRepo.create({firstName:req.body.firstName, lastName: req.body.lastName})
+      
       
         res.status(200).json('')
 

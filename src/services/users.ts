@@ -9,10 +9,10 @@ let data = require('/src/data/data.json');
 
  
 
-const create = async(user: { id?: number; firstName: string; lastName: string; }): Promise<void> => {
+const create = async(user: { id?: number; firstName: string; lastName: string; })  => {
 
     
-    new Promise((resolve, reject) => {
+    
         // generate new user id
         user.id = data.users.length ? data.users.length+ 1 : 1;
 
@@ -23,15 +23,14 @@ const create = async(user: { id?: number; firstName: string; lastName: string; }
         // add and save user
         data.users.push(user);
         saveData();
-        resolve('');
-    })
+       
 }
 
 export const usersRepo = {
     getAll: () => data.users,
     getById: (id: { toString: () => any; }) => data.users.find((x: { id: { toString: () => any; }; }) => x.id.toString() === id.toString()),
     find: (x: any) =>data.users.find(x),
-    create: () => data.users,
+    create,
     update,
     delete: _delete, 
 };
