@@ -60,5 +60,5 @@ function _delete(id: { toString: () => any; }) {
 // private helper functions
 
 function saveData() {
-    fs.writeFileSync('/src/data/data.json', JSON.stringify(data, null, 4));
+    fs.writeFileSync(path.join(process.cwd() + '/src/data/data.json'), JSON.stringify(data, null, 4));
 }
