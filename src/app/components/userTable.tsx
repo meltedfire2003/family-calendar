@@ -7,12 +7,15 @@ import { Card } from "primereact/card";
 import { Divider } from "primereact/divider";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
+ 
 
 export default function UserTable() {
   const [users, setUsers] = useState([]);
   const [visible, setVisible] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+ 
 
   useEffect(() => {
     getUsers();

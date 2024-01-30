@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import moment from "moment";
 import { CiCalendar, CiCircleList, CiForkAndKnife, CiTrash } from "react-icons/ci";
 import { useFullscreen } from "./fullscreen";
@@ -21,6 +21,8 @@ import { InputText } from "primereact/inputtext";
 import { get } from "http";
 import UserTable from "./components/userTable";
 
+import CustomWeekView from './components/menuCalendar'
+
 const localizer = momentLocalizer(moment);
 
 const events = [
@@ -31,12 +33,76 @@ const events = [
   },
 ];
 
+const menu = [
+  {
+    start: new Date(2024, 0, 29, 13, 0, 0),
+    end: new Date(2024, 0, 29, 14, 0, 0),
+    title: "Dirty Rice Casserole",
+    allDay:true,
+    resource:'https://www.cdkitchen.com/recipes/recs/1002/Dirty-Rice-Casserole73472.shtml'
+    
+  },
+  {
+    start: new Date(2024, 0, 30, 13, 0, 0),
+    end: new Date(2024, 0, 30, 14, 0, 0),
+    title: "Steak",
+    allDay:true
+    
+  },
+  {
+    start: new Date(2024, 0, 31, 13, 0, 0),
+    end: new Date(2024, 0, 31, 14, 0, 0),
+    title: "Spaghetti",
+    allDay:true
+    
+  },
+  {
+    start: new Date(2024, 1, 1, 13, 0, 0),
+    end: new Date(2024, 1, 1, 14, 0, 0),
+    title: "Pizza",
+    allDay:true
+    
+  },
+  {
+    start: new Date(2024, 1, 2, 13, 0, 0),
+    end: new Date(2024, 1, 2, 14, 0, 0),
+    title: "Ribs",
+    allDay:true
+    
+  },
+  {
+    start: new Date(2024, 1, 3, 13, 0, 0),
+    end: new Date(2024, 1, 3, 14, 0, 0),
+    title: "Arbys",
+    allDay:true
+    
+  },
+  
+  
+];
+
 export default function Home() {
   const { fullscreenRef, enterFullscreen, exitFullscreen, fullscreenActive } = useFullscreen();
   const [selectedTab, setSelectedTab] = useState("calendar");
   
 
-
+  const {views, ...otherProps} = useMemo(() => ({
+    views: {
+      month: true,
+      week: CustomWeekView,
+      day: true
+    },
+    selectable: true,
+    localizer:localizer,
+    defaultDate: new Date(),
+    defaultView:'week',
+    events: menu,
+    style: {
+      height:"80vh"
+    }
+    // ... other props
+  }), [])
+ 
  
 
   const items = [
@@ -69,6 +135,19 @@ export default function Home() {
     { name: "Do Laundry", completed: false },
     { name: "Take a nap", completed: true },
   ];
+
+
+
+
+
+
+  
+
+
+
+
+
+
 
   const itemTemplate = (item: any) => {
     return (
@@ -118,9 +197,9 @@ export default function Home() {
           </div>
         )}
 
-        {selectedTab === "menu" && <p>menu</p>}
+        {selectedTab === "menu" && <div id="test"> <Calendar views={views} {...otherProps}/></div>}
 
-        {selectedTab === "calendar" && <Calendar selectable localizer={localizer} defaultDate={new Date()} defaultView="month" events={events} style={{ height: "80vh" }} />}
+        {selectedTab === "calendar" && <Calendar  selectable localizer={localizer} defaultDate={new Date()} defaultView="month" events={events} style={{ height: "80vh" }} />}
 
         {selectedTab === "chores" && <p>chores</p>}
 

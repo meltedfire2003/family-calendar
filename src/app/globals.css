@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 @layer tailwind-base, primereact, tailwind-utilities;
 
 @layer tailwind-base {
@@ -13,6 +14,28 @@
   @tailwind components;
   @tailwind utilities;
 }
+
+#test .rbc-time-view {
+  border:0px;
+
+    .rbc-label {
+      display: none;
+    }
+    .rbc-allday-cell {
+      height: calc(100vh - 98px);
+      max-height: unset;
+    }
+    .rbc-time-content {
+      display: none;
+    }
+
+    .rbc-time-view {
+    
+    }
+    /* .rbc-time-header {
+      border-bottom: 1px lightgray solid
+    } */
+  }
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

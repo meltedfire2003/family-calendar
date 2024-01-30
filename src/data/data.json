@@ -1,19 +1,9 @@
 {
     "users": [
         {
-            "firstName": "Owen",
-            "lastName": "Newton",
+            "firstName": "owen",
+            "lastName": "newton",
             "id": 2
-        },
-        {
-            "firstName": "Jamie",
-            "lastName": " Ewton",
-            "id": 2
-        },
-        {
-            "firstName": "Kim",
-            "lastName": "Newton",
-            "id": 3
         }
     ]
 }

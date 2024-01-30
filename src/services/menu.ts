@@ -1,17 +1,12 @@
 import  fs  from 'fs';
-import path from 'path'; 
- 
- 
- 
-
-let data = require('/src/data/data.json');
-
+import path from 'path';
 
  
+//let path1= path.resolve("src/data", "data.json");
+console.log('path', path.join(process.cwd(), 'src/data/data.json'))
+let data =  require('../src/data/menu.json') ;
 
 const create = async(user: { id?: number; firstName: string; lastName: string; }): Promise<void> => {
-
-    
     new Promise((resolve, reject) => {
         // generate new user id
         user.id = data.users.length ? data.users.length+ 1 : 1;
