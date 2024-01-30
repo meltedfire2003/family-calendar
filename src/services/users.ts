@@ -9,7 +9,7 @@ let data = require('/src/data/data.json');
 
  
 
-const create = async(user: { id?: number; firstName: string; lastName: string; })  => {
+const create = (user: { id?: number; firstName: string; lastName: string; })  => {
 
     
     
@@ -60,5 +60,5 @@ function _delete(id: { toString: () => any; }) {
 // private helper functions
 
 function saveData() {
-    fs.writeFileSync(process.cwd() + '/src/data/data.json', JSON.stringify(data, null, 4));
+    fs.writeFileSync('/src/data/data.json', JSON.stringify(data, null, 4));
 }
