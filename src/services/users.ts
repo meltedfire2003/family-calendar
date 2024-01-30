@@ -31,7 +31,7 @@ export const usersRepo = {
     getAll: () => data.users,
     getById: (id: { toString: () => any; }) => data.users.find((x: { id: { toString: () => any; }; }) => x.id.toString() === id.toString()),
     find: (x: any) =>data.users.find(x),
-    create,
+    create: () => data.users,
     update,
     delete: _delete, 
 };
